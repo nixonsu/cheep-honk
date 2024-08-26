@@ -2,4 +2,4 @@
 
 Daily notifications on lowest fuel prices near you!
 
-![honk honk.jpg](docs%2Fhonk%20honk.png)
+![honkhonk.png](docs%2Fhonkhonk.png)
