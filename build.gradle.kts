@@ -18,6 +18,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3")
     implementation("org.slf4j:slf4j-api:1.7.30")
     implementation("org.slf4j:slf4j-simple:1.7.30")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
     testImplementation("io.mockk:mockk:1.13.7")
 }
 
