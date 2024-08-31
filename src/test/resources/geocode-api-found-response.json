@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "Mataranka",
+          "short_name": "Mataranka",
+          "types": [
+            "locality",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Roper Gulf Region",
+          "short_name": "Roper Gulf Region",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Northern Territory",
+          "short_name": "NT",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Australia",
+          "short_name": "AU",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "0852",
+          "short_name": "0852",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "Mataranka NT 0852, Australia",
+      "geometry": {
+        "bounds": {
+          "northeast": {
+            "lat": -14.893339,
+            "lng": 133.176406
+          },
+          "southwest": {
+            "lat": -15.0164809,
+            "lng": 132.925913
+          }
+        },
+        "location": {
+          "lat": -14.9230049,
+          "lng": 133.0667202
+        },
+        "location_type": "APPROXIMATE",
+        "viewport": {
+          "northeast": {
+            "lat": -14.893339,
+            "lng": 133.176406
+          },
+          "southwest": {
+            "lat": -15.0164809,
+            "lng": 132.925913
+          }
+        }
+      },
+      "place_id": "ChIJJ9RFC-yzrywRsIQkKqgXAgQ",
+      "types": [
+        "locality",
+        "political"
+      ]
+    }
+  ],
+  "status": "OK"
+}
