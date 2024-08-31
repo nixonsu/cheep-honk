@@ -1,6 +1,6 @@
 package extensions
 
-fun Any.prettyPrint(): String {
+fun Any.toPrettyString(): String {
 
     var indentLevel = 0
     val indentWidth = 4
