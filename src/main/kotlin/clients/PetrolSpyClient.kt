@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import extensions.toPrettyString
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -32,23 +31,4 @@ class PetrolSpyClient(private val httpClient: HttpClient) {
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .registerModule(KotlinModule())
     }
-}
-
-fun main() {
-    val client = HttpClient.newHttpClient()
-
-    val petrolSpyClient = PetrolSpyClient(client)
-
-    val bounds = Bounds(
-        Coordinates(
-            -37.9519166,
-            145.21427246648548,
-        ),
-        Coordinates(
-            -38.01944597721287,
-            145.1521142
-        )
-    )
-
-    println(petrolSpyClient.getStationsWithinCoordinates(bounds).toPrettyString())
 }
