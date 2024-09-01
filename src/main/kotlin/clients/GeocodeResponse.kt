@@ -26,14 +26,16 @@ data class Coordinates(
 fun GeocodeResponse.toBounds(): Bounds {
     val location = this.results.first().geometry.location
 
+    val delta = 0.02
+
     val bounds =  Bounds(
         northeast = Coordinates(
-            lat = location.lat + 0.04,
-            lng = location.lng + 0.04,
+            lat = location.lat + delta,
+            lng = location.lng + delta,
         ),
         southwest = Coordinates(
-            lat = location.lat - 0.04,
-            lng = location.lng - 0.04
+            lat = location.lat - delta,
+            lng = location.lng - delta
         )
     )
 
