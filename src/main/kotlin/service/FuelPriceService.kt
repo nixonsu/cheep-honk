@@ -1,27 +1,37 @@
 package service
 
-import clients.GeocodeClient
-import clients.PetrolSpyClient
-import clients.Station
-import clients.toBounds
-import extensions.toPrettyString
+import clients.*
+import domain.FuelStation
+import domain.Location
 
-class FuelPriceService(private val petrolSpyClient: PetrolSpyClient, private val geocodeClient: GeocodeClient) {
-    fun getNCheapestStationsBySuburb(n: Int, suburb: String): List<Station> {
+class FuelPriceService(
+    private val petrolSpyClient: PetrolSpyClient,
+    private val geocodeClient: GeocodeClient,
+    private val distanceMatrixClient: DistanceMatrixClient
+) {
+    fun getNCheapestStationsBySuburb(n: Int, suburb: String): List<FuelStation> {
         val geocodeResponse = geocodeClient.getCoordinateBoundsByAddress(suburb)
 
-        if (geocodeResponse.results.isEmpty()) {
-            return emptyList()
-        }
+        if (geocodeResponse.results.isEmpty()) return emptyList()
 
         val bounds = geocodeResponse.toBounds()
 
         val petrolSpyResponse = petrolSpyClient.getStationsWithinCoordinates(bounds)
 
-        println(petrolSpyResponse.toPrettyString())
-
         val stationsSortedByPrice = petrolSpyResponse.message.list.sortedBy { it.prices.u91.amount }
 
-        return stationsSortedByPrice.take(n)
+        val cheapestStations = stationsSortedByPrice.take(n)
+
+        val enrichedStations = cheapestStations.map {
+            it.toFuelStation(
+                distanceMatrixClient.getDistanceMatrix(ORIGIN, it.location.toDomain()).toTravelInfo()
+            )
+        }
+
+        return enrichedStations
+    }
+
+    companion object {
+        private val ORIGIN = Location( -37.8770781, 145.0449557)
     }
 }
