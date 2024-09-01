@@ -1,3 +1,4 @@
+import clients.DistanceMatrixClient
 import clients.GeocodeClient
 import clients.PetrolSpyClient
 import com.amazonaws.services.lambda.runtime.Context
@@ -17,8 +18,9 @@ fun main() {
 
     val petrolSpyClient = PetrolSpyClient(httpClient)
     val geocodeClient = GeocodeClient(httpClient)
+    val distanceMatrixClient = DistanceMatrixClient(httpClient)
 
-    val fuelPriceService = FuelPriceService(petrolSpyClient, geocodeClient)
+    val fuelPriceService = FuelPriceService(petrolSpyClient, geocodeClient, distanceMatrixClient)
 
     println(
         fuelPriceService.getNCheapestStationsBySuburb(5, "Caulfield").toPrettyString()
