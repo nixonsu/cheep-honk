@@ -3,15 +3,18 @@ package clients.google
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import domain.Location
+import exceptions.TravelInfoNotFoundException
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import kotlin.random.Random.Default.nextDouble
 
 class GoogleDistanceMatrixClientTest {
 
@@ -25,34 +28,38 @@ class GoogleDistanceMatrixClientTest {
     inner class GetTravelInfoBetweenLocations {
 
         @Test
-        fun `when address is found should return location`() {
+        fun `when travel info found should return travel distance and duration`() {
             val mockResponse: HttpResponse<String> = mockk()
-            val mockResponseBody = this::class.java.getResource("/geocode-api-found-response.json")?.readText(Charsets.UTF_8)
+            val mockResponseBody = this::class.java.getResource("/distance-matrix-api-success-response.json")?.readText(Charsets.UTF_8)
             every { mockResponse.body() } returns mockResponseBody
             every { mockResponse.statusCode() } returns 200
             every {
                 httpClient.send<String>(any<HttpRequest>(), any())
             } returns mockResponse
+            val randomLocation = Location(nextDouble(), nextDouble())
 
-            val location = subject.getTravelInfoBetween()
+            val travelInfo = subject.getTravelInfoBetween(randomLocation, randomLocation)
 
-            assertEquals(-14.9230049, location?.lat)
-            assertEquals( 133.0667202, location?.lng)
+            assertEquals(799, travelInfo.distanceInKms)
+            assertEquals(99, travelInfo.durationInSeconds)
         }
 
         @Test
-        fun `when address is not found should return null`() {
+        fun `when travel info not found should throw exception`() {
             val mockResponse: HttpResponse<String> = mockk()
-            val mockResponseBody = this::class.java.getResource("/geocode-api-not-found-response.json")?.readText(Charsets.UTF_8)
+            val mockResponseBody = this::class.java.getResource("/distance-matrix-api-not-found-response.json")?.readText(Charsets.UTF_8)
             every { mockResponse.body() } returns mockResponseBody
             every { mockResponse.statusCode() } returns 200
             every {
                 httpClient.send<String>(any<HttpRequest>(), any())
             } returns mockResponse
+            val randomLocation = Location(nextDouble(), nextDouble())
 
-            val location = subject.getLocationFor("Mata")
+            val exception = assertThrows<TravelInfoNotFoundException> {
+                subject.getTravelInfoBetween(randomLocation, randomLocation)
+            }
 
-            assertNull(location)
+            assertEquals("Travel info not found between origin: $randomLocation, destination: $randomLocation", exception.message)
         }
     }
 }

@@ -1,0 +1,27 @@
+{
+  "destination_addresses": [
+    "45 Normanby Rd, Caulfield North VIC 3161, Australia"
+  ],
+  "origin_addresses": [
+    "123 Kambrook Rd, Caulfield North VIC 3161, Australia"
+  ],
+  "rows": [
+    {
+      "elements": [
+        {
+          "distance": {
+            "text": "0.8 km",
+            "value": 799
+          },
+          "duration": {
+            "text": "2 mins",
+            "value": 99
+          },
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}
+

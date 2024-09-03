@@ -19,5 +19,6 @@ data class Geometry(
 enum class Status {
     OK,
     REQUEST_DENIED,
-    ZERO_RESULTS
+    ZERO_RESULTS,
+    NOT_FOUND
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import domain.Location
 import domain.TravelInfo
+import exceptions.TravelInfoNotFoundException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -20,6 +21,11 @@ class GoogleDistanceMatrixClient(
         val request = HttpRequest.newBuilder().GET().uri(uri).build()
         val httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         val response = objectMapper.readValue<DistanceMatrixResponse>(httpResponse.body())
+
+        if (response.rows.first().elements.first().status == Status.NOT_FOUND) {
+            throw TravelInfoNotFoundException("Travel info not found between origin: $origin, destination: $destination")
+        }
+
         return response.toTravelInfo()
     }
 

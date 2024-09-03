@@ -11,8 +11,9 @@ data class Row(
 )
 
 data class Element(
-    val distance: Value,
-    val duration: Value
+    val distance: Value?,
+    val duration: Value?,
+    val status: Status
 )
 
 data class Value(
@@ -21,6 +22,6 @@ data class Value(
 )
 
 fun DistanceMatrixResponse.toTravelInfo() = TravelInfo(
-        distanceInKms = rows.first().elements.first().distance.value,
-        durationInSeconds = rows.first().elements.first().duration.value
+        distanceInKms = rows.first().elements.first().distance!!.value,
+        durationInSeconds = rows.first().elements.first().duration!!.value
     )
