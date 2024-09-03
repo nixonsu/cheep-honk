@@ -1,9 +1,8 @@
-package clients
+package clients.petrolspy
 
 import com.fasterxml.jackson.annotation.JsonAlias
 import domain.FuelStation
 import domain.Location
-import domain.TravelInfo
 
 data class PetrolSpyResponse(
     val message: Message
@@ -29,8 +28,6 @@ data class PetrolSpyLocation(
     val lng: Double
 )
 
-fun PetrolSpyLocation.toDomain() = Location(lat, lng)
-
 data class Prices(
     @JsonAlias("U91")
     val u91: U91
@@ -40,6 +37,10 @@ data class U91(
     val amount: Double
 )
 
-fun Station.toFuelStation(travelInfo: TravelInfo) = FuelStation(
-    name, brand, state, suburb, location.toDomain(), prices, travelInfo
+fun Station.toFuelStation() = FuelStation(
+    name, brand, state, suburb, Location(location.lat, location.lng), prices.toDomain()
 )
+
+fun Prices.toDomain() = domain.Prices(u91.toDomain())
+
+fun U91.toDomain() = domain.U91(amount)

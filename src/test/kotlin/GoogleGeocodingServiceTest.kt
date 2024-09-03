@@ -1,5 +1,5 @@
-import clients.GeocodeClient
-import clients.GeocodeResponse
+import clients.geocode.GoogleGeocodingClient
+import clients.geocode.GeocodeResponse
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -9,10 +9,10 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class GeocodeClientTest {
+class GoogleGeocodingClientTest {
 
     private val httpClient = mockk<HttpClient>()
-    private val subject = GeocodeClient(httpClient)
+    private val subject = GoogleGeocodingClient(httpClient)
 
     @Nested
     inner class GetCoordinateBoundsByAddress {
