@@ -1,0 +1,14 @@
+{
+  "header": {
+    "apiVersion": "0.1",
+    "requested": 1725363868040,
+    "type": "error",
+    "size": null
+  },
+  "message": {
+    "error": {
+      "code": "Area is too big, zoom in",
+      "message": "Area is too big, zoom in"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "header": {
+    "apiVersion": "0.1",
+    "requested": 1725363728584,
+    "type": "list",
+    "size": 0
+  },
+  "message": {
+    "expiration": {
+      "E10": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "E10"
+      },
+      "LPG": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "LPG"
+      },
+      "DIESEL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "DIESEL"
+      },
+      "AdBlue": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "AdBlue"
+      },
+      "TruckDSL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "TruckDSL"
+      },
+      "BIODIESEL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "BIODIESEL"
+      },
+      "E85": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "E85"
+      },
+      "U91": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U91"
+      },
+      "U98": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U98"
+      },
+      "U95": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U95"
+      },
+      "PremDSL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "PremDSL"
+      }
+    },
+    "list": []
+  }
+}

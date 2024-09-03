@@ -1,0 +1,187 @@
+{
+  "header": {
+    "apiVersion": "0.1",
+    "requested": 1725363171673,
+    "type": "list",
+    "size": 2
+  },
+  "message": {
+    "expiration": {
+      "E10": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "E10"
+      },
+      "LPG": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "LPG"
+      },
+      "DIESEL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "DIESEL"
+      },
+      "AdBlue": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "AdBlue"
+      },
+      "TruckDSL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "TruckDSL"
+      },
+      "BIODIESEL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "BIODIESEL"
+      },
+      "E85": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "E85"
+      },
+      "U91": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U91"
+      },
+      "U98": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U98"
+      },
+      "U95": {
+        "fresh": 10,
+        "fade": 20,
+        "type": "U95"
+      },
+      "PremDSL": {
+        "fresh": 48,
+        "fade": 240,
+        "type": "PremDSL"
+      }
+    },
+    "list": [
+      {
+        "id": "5212adc80364fe88b97858c7",
+        "name": "BP Swan Street",
+        "brand": "BP",
+        "state": "VIC",
+        "suburb": "Richmond",
+        "address": "282 Swan St",
+        "postCode": "3121",
+        "country": "AU",
+        "phone": "03 9427 7089",
+        "location": {
+          "x": 145.000166,
+          "y": -37.826133
+        },
+        "eftops": true,
+        "truckpark": false,
+        "restrooms": true,
+        "open24": true,
+        "prices": {
+          "U91": {
+            "id": "66d626ace4b041942e300635",
+            "stationId": "5212adc80364fe88b97858c7",
+            "type": "U91",
+            "updated": 1725310636894,
+            "relevant": true,
+            "reportedBy": "Bomber 🚀",
+            "amount": 167.9
+          },
+          "U95": {
+            "id": "66d515ece4b041942e2fdcf5",
+            "stationId": "5212adc80364fe88b97858c7",
+            "type": "U95",
+            "updated": 1725310636683,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 179.9
+          },
+          "U98": {
+            "id": "66d515ece4b041942e2fdcf3",
+            "stationId": "5212adc80364fe88b97858c7",
+            "type": "U98",
+            "updated": 1725310636683,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 189.9
+          },
+          "PremDSL": {
+            "id": "66d626c5e4b041942e30064a",
+            "stationId": "5212adc80364fe88b97858c7",
+            "type": "PremDSL",
+            "updated": 1725310661778,
+            "relevant": true,
+            "reportedBy": "Bomber 🚀",
+            "amount": 185.9
+          },
+          "LPG": {
+            "id": "66d626c5e4b041942e300649",
+            "stationId": "5212adc80364fe88b97858c7",
+            "type": "LPG",
+            "updated": 1725310661778,
+            "relevant": true,
+            "reportedBy": "Bomber 🚀",
+            "amount": 87.9
+          }
+        },
+        "icon": "bp.png",
+        "brandIcon": "bp.png",
+        "autoUpdated": false
+      },
+      {
+        "id": "5212f92f0364bb212f028d18",
+        "name": "7-Eleven Richmond",
+        "brand": "SEVENELEVEN",
+        "state": "VIC",
+        "suburb": "Richmond",
+        "address": "94 Church Street ",
+        "postCode": "3121",
+        "country": "AU",
+        "phone": "03 9428 0495",
+        "location": {
+          "x": 144.999756,
+          "y": -37.813694
+        },
+        "open24": true,
+        "prices": {
+          "E10": {
+            "type": "E10",
+            "updated": 1725359887519,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 207.9
+          },
+          "U91": {
+            "type": "U91",
+            "updated": 1725359887519,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 209.9
+          },
+          "U98": {
+            "type": "U98",
+            "updated": 1725359887519,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 230.9
+          },
+          "PremDSL": {
+            "type": "PremDSL",
+            "updated": 1725359887519,
+            "relevant": true,
+            "reportedBy": "",
+            "amount": 183.9
+          }
+        },
+        "icon": "7eleven.png",
+        "brandIcon": "7eleven.png",
+        "autoUpdated": false
+      }
+    ]
+  }
+}
