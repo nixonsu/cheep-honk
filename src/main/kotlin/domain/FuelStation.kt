@@ -1,15 +1,22 @@
 package domain
 
-import clients.Prices
-
 data class FuelStation(
     val name: String,
     val brand: String,
     val state: String,
     val suburb: String,
     val location: Location,
-    val prices: Prices,
-    val travelInfo: TravelInfo
+    val prices: Prices
+) {
+    lateinit var travelInfo: TravelInfo
+}
+
+data class Prices(
+    val u91: U91
+)
+
+data class U91(
+    val amount: Double
 )
 
 data class Location(
