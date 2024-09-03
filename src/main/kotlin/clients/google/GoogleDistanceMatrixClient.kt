@@ -1,4 +1,4 @@
-package clients.distancematrix
+package clients.google
 
 import clients.TravelInfoService
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -10,7 +10,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class GoogleDistanceMatrixService(
+class GoogleDistanceMatrixClient(
     private val httpClient: HttpClient,
     private val objectMapper: ObjectMapper
 ): TravelInfoService {

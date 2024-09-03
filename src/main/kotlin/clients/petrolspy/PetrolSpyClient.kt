@@ -10,7 +10,7 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class PetrolSpyService(
+class PetrolSpyClient(
     private val httpClient: HttpClient,
     private val objectMapper: ObjectMapper
 ): FuelStationsService {

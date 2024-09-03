@@ -1,10 +1,10 @@
-package clients.geocode
+package clients.google
 
 import domain.Location
 
 data class GeocodeResponse(
     val results: List<Result>,
-    val errors: String,
+    val errors: String?,
     val status: Status
 )
 
@@ -18,5 +18,6 @@ data class Geometry(
 
 enum class Status {
     OK,
-    REQUEST_DENIED
+    REQUEST_DENIED,
+    ZERO_RESULTS
 }

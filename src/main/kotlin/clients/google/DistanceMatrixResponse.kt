@@ -1,4 +1,4 @@
-package clients.distancematrix
+package clients.google
 
 import domain.TravelInfo
 
@@ -22,5 +22,5 @@ data class Value(
 
 fun DistanceMatrixResponse.toTravelInfo() = TravelInfo(
         distanceInKms = rows.first().elements.first().distance.value,
-        durationInMinutes = rows.first().elements.first().duration.value
+        durationInSeconds = rows.first().elements.first().duration.value
     )

@@ -1,6 +1,6 @@
-import clients.distancematrix.GoogleDistanceMatrixService
-import clients.geocode.GoogleGeocodingService
-import clients.petrolspy.PetrolSpyService
+import clients.google.GoogleDistanceMatrixClient
+import clients.google.GoogleGeocodingClient
+import clients.petrolspy.PetrolSpyClient
 import clients.telegram.TelegramClient
 import com.amazonaws.services.lambda.runtime.*
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -17,9 +17,9 @@ class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
         val objectMapper: ObjectMapper = ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .registerModule(KotlinModule())
-        val petrolSpyClient = PetrolSpyService(httpClient, objectMapper)
-        val googleGeocodingClient = GoogleGeocodingService(httpClient, objectMapper)
-        val googleDistanceMatrixClient = GoogleDistanceMatrixService(httpClient, objectMapper)
+        val petrolSpyClient = PetrolSpyClient(httpClient, objectMapper)
+        val googleGeocodingClient = GoogleGeocodingClient(httpClient, objectMapper)
+        val googleDistanceMatrixClient = GoogleDistanceMatrixClient(httpClient, objectMapper)
         val fuelPriceService = FuelPriceService(petrolSpyClient, googleGeocodingClient, googleDistanceMatrixClient)
         val telegramClient = TelegramClient(httpClient, objectMapper)
 
