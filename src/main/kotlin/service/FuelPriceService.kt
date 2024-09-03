@@ -1,37 +1,41 @@
 package service
 
-import clients.*
+import clients.FuelStationsService
+import clients.GeocodingService
+import clients.TravelInfoService
+import domain.Bounds
 import domain.FuelStation
 import domain.Location
 
 class FuelPriceService(
-    private val petrolSpyClient: PetrolSpyClient,
-    private val geocodeClient: GeocodeClient,
-    private val distanceMatrixClient: DistanceMatrixClient
+    private val fuelStationsService: FuelStationsService,
+    private val geocodingService: GeocodingService,
+    private val travelInfoService: TravelInfoService
 ) {
     fun getNCheapestStationsBySuburb(n: Int, suburb: String): List<FuelStation> {
-        val geocodeResponse = geocodeClient.getCoordinateBoundsByAddress(suburb)
+        val location = geocodingService.getLocationFor(suburb) ?: return emptyList()
 
-        if (geocodeResponse.results.isEmpty()) return emptyList()
+        val bounds = Bounds.createBoundsFrom(location, 0.02)
 
-        val bounds = geocodeResponse.toBounds()
+        val fuelStations = fuelStationsService.getStationsWithinBounds(bounds)
 
-        val petrolSpyResponse = petrolSpyClient.getStationsWithinCoordinates(bounds)
-
-        val stationsSortedByPrice = petrolSpyResponse.message.list.sortedBy { it.prices.u91.amount }
+        val stationsSortedByPrice = fuelStations.sortedBy { it.prices.u91.amount }
 
         val cheapestStations = stationsSortedByPrice.take(n)
 
-        val enrichedStations = cheapestStations.map {
-            it.toFuelStation(
-                distanceMatrixClient.getDistanceMatrix(ORIGIN, it.location.toDomain()).toTravelInfo()
-            )
+        cheapestStations.forEach {
+            it.apply {
+                travelInfo = travelInfoService.getTravelInfoBetween(
+                    Location(ORIGIN_LAT, ORIGIN_LNG), it.location
+                )
+            }
         }
 
-        return enrichedStations
+        return cheapestStations
     }
 
     companion object {
-        private val ORIGIN = Location( -37.8770781, 145.0449557)
+        private val ORIGIN_LAT = System.getenv("ORIGIN_LAT").toDouble()
+        private val ORIGIN_LNG = System.getenv("ORIGIN_LNG").toDouble()
     }
 }
