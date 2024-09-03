@@ -9,7 +9,13 @@ data class PetrolSpyResponse(
 )
 
 data class Message(
-    val list: List<Station>
+    val list: List<Station>?,
+    val error: PetrolSpyError?
+)
+
+class PetrolSpyError(
+    val code: String,
+    val message: String
 )
 
 data class Station(
@@ -17,6 +23,8 @@ data class Station(
     val brand: String,
     val state: String,
     val suburb: String,
+    val address: String,
+    val postCode: String,
     val location: PetrolSpyLocation,
     val prices: Prices
 )
@@ -38,7 +46,7 @@ data class U91(
 )
 
 fun Station.toFuelStation() = FuelStation(
-    name, brand, state, suburb, Location(location.lat, location.lng), prices.toDomain()
+    name, brand, state, suburb, address, postCode, Location(location.lat, location.lng), prices.toDomain()
 )
 
 fun Prices.toDomain() = domain.Prices(u91.toDomain())

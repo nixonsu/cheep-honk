@@ -25,6 +25,7 @@ class TelegramClient(
         val messageRequest = MessageRequest(chatId = TELEGRAM_CHAT_ID, text = message)
         val request = HttpRequest.newBuilder()
             .POST(BodyPublishers.ofString(objectMapper.writeValueAsString(messageRequest)))
+            .uri(URI.create(TELEGRAM_SEND_MESSAGE_URL))
             .build()
 
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
@@ -35,7 +36,7 @@ class TelegramClient(
     }
 
     private fun authenticate() {
-        val request = HttpRequest.newBuilder().GET().uri(URI.create(TELEGRAM_URL)).build()
+        val request = HttpRequest.newBuilder().GET().uri(URI.create(TELEGRAM_AUTH_URL)).build()
 
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
@@ -48,7 +49,8 @@ class TelegramClient(
 
     companion object {
         private val TELEGRAM_AUTH_TOKEN = System.getenv("TELEGRAM_AUTH_TOKEN")
-        private val TELEGRAM_CHAT_ID = System.getenv("TELEGRAM_CHAT_ID")
-        private val TELEGRAM_URL = "https://api.telegram.org/bot$TELEGRAM_AUTH_TOKEN/getMe"
+        private val TELEGRAM_CHAT_ID = System.getenv("TELEGRAM_CHAT_ID") ?: ""
+        private val TELEGRAM_AUTH_URL = "https://api.telegram.org/bot$TELEGRAM_AUTH_TOKEN/getMe"
+        private val TELEGRAM_SEND_MESSAGE_URL = "https://api.telegram.org/bot$TELEGRAM_AUTH_TOKEN/sendMessage"
     }
 }

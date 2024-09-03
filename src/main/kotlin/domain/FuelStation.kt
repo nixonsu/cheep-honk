@@ -5,6 +5,8 @@ data class FuelStation(
     val brand: String,
     val state: String,
     val suburb: String,
+    val address: String,
+    val postcode: String,
     val location: Location,
     val prices: Prices
 ) {

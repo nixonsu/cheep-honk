@@ -21,9 +21,9 @@ class PetrolSpyClient(
         val httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         val response = objectMapper.readValue<PetrolSpyResponse>(httpResponse.body())
 
-        return response.message.list.map {
+        return response.message.list?.map {
             it.toFuelStation()
-        }
+        } ?: emptyList()
     }
 
     private fun createUri(bounds: Bounds): URI? {
