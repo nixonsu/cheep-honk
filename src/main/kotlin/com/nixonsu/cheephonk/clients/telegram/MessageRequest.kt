@@ -1,10 +1,9 @@
 package com.nixonsu.cheephonk.clients.telegram
 
-import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonProperty
 
 data class MessageRequest(
-    @JsonAlias("chat_id")
+    @JsonProperty("chat_id")
     val chatId: String,
-
     val text: String
 )
