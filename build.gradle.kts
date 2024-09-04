@@ -23,6 +23,15 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.7")
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass.set("com.nixonsu.cheephonk.ApplicationHandlerKt")
+}
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -36,13 +45,4 @@ tasks {
         archiveBaseName.set("cheep-honk")
         archiveClassifier.set("")
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-application {
-    mainClass.set("com.nixonsu.cheephonk.ApplicationHandlerKt")
 }
