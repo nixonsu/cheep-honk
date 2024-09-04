@@ -1,0 +1,91 @@
+Parameters:
+  GitSHA:
+    Description: The Git SHA for correlating the deployed code
+    Type: String
+  GoogleApiKey:
+    Description: API key for Google Maps Platforms
+    Type: String
+  TelegramAuthToken:
+    Description: Telegram auth token for bot
+    Type: String
+  TelegramChatId:
+    Description: Telegram chat id for sending notifications to
+    Type: String
+  OriginLat:
+    Description: Origin latitude
+    Type: Number
+  OriginLng:
+    Description: Origin longitude
+    Type: Number
+
+Resources:
+  LambdaExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: "LambdaExecutionPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource: "arn:aws:logs:*:*:*"
+
+  CheepHonkLambda:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      FunctionName: "CheepHonk"
+      Handler: "com.nixonsu.cheephonk.ApplicationHandlerKt"
+      Role:
+        Fn::GetAtt:
+          - "LambdaExecutionRole"
+          - "Arn"
+      Code:
+        S3Bucket: "cheep-honk"
+        S3Key: !Sub "cheep-honk-${GitSHA}.jar"
+      Runtime: "java17"
+      Timeout: 900
+      Environment:
+        Variables:
+          GOOGLE_API_KEY: !Ref GoogleApiKey
+          TELEGRAM_AUTH_TOKEN: !Ref TelegramAuthToken
+          TELEGRAM_CHAT_ID: !Ref TelegramChatId
+          ORIGIN_LAT: !Ref OriginLat
+          ORIGIN_LNG: !Ref OriginLng
+
+  ScheduledRule:
+    Type: "AWS::Events::Rule"
+    Properties:
+      Description: "Trigger Cheep Honk Lambda every day at 9 AM."
+      ScheduleExpression: "cron(0 22 * * ? *)"
+      State: "ENABLED"
+      Targets:
+        - Arn:
+            Fn::GetAtt:
+              - "CheepHonk"
+              - "Arn"
+          Id: "CheepHonkLambda"
+
+  PermissionForEventsToInvokeLambda:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      FunctionName:
+        Ref: "CheepHonkLambda"
+      Action: "lambda:InvokeFunction"
+      Principal: "events.amazonaws.com"
+      SourceArn:
+        Fn::GetAtt:
+          - "ScheduledRule"
+          - "Arn"
