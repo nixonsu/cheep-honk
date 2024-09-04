@@ -28,10 +28,14 @@ class TelegramClient(
             .uri(URI.create(TELEGRAM_SEND_MESSAGE_URL))
             .build()
 
+        log.info(request.toString())
+
         val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
 
         if (response.statusCode() != 200) {
-            throw NotificationFailedToSendException("Failed to send message to Telegram")
+            throw NotificationFailedToSendException(
+                "Failed to send message to Telegram. Response status code: ${response.statusCode()}, error: ${response.body()}"
+            )
         }
     }
 
