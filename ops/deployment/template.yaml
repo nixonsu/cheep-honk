@@ -47,7 +47,7 @@ Resources:
     Type: "AWS::Lambda::Function"
     Properties:
       FunctionName: "CheepHonk"
-      Handler: "com.nixonsu.cheephonk.ApplicationHandlerKt"
+      Handler: "com.nixonsu.cheephonk.ApplicationHandler"
       Role:
         Fn::GetAtt:
           - "LambdaExecutionRole"
