@@ -1,0 +1,77 @@
+name: Cheep Honk CI/CD Pipeline
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: "ap-southeast-2"
+  GITHUB_SHA: ${{ github.sha }}
+  GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+  TELEGRAM_AUTH_TOKEN: ${{ secrets.TELEGRAM_AUTH_TOKEN }}
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  ORIGIN_LAT: ${{ secrets.ORIGIN_LAT }}
+  ORIGIN_LNG: ${{ secrets.ORIGIN_LNG }}
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - "README.md"
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: 📦 Build & test application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "corretto"
+          java-version: "17"
+
+      - name: Build and run tests
+        run: ./ops/scripts/build.sh
+
+  publish:
+    name: 💿 Publish and upload artifacts
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create S3 bucket
+        run: ./ops/scripts/create-s3.sh
+
+      - name: Publish jar and package template.yaml
+        run: ./ops/scripts/publish.sh
+
+      - name: Upload packaged-template.yaml
+        uses: actions/upload-artifact@v2
+        with:
+          name: packaged-template
+          path: ./ops/deployment/packaged-template.yaml
+
+  deploy:
+    name: 🚀 Deploy to production
+    runs-on: ubuntu-latest
+    needs: publish
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download packaged-template.yaml
+        uses: actions/download-artifact@v2
+        with:
+          name: packaged-template
+          path: ./ops/deployment
+
+      - name: Deploy to AWS
+        run: ./ops/scripts/deploy.sh
