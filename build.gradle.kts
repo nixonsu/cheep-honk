@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.22"
     application
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "com.nixonsu"
@@ -30,11 +31,19 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
 
+tasks {
+    shadowJar {
+        archiveBaseName.set("cheep-honk")
+        archiveClassifier.set("")
+    }
+}
+
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
 
 application {
-    mainClass.set("ApplicationHandlerKt")
+    mainClass.set("com.nixonsu.cheephonk.ApplicationHandlerKt")
 }
