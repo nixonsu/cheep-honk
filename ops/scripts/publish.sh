@@ -8,7 +8,7 @@ echo "Done!"
 
 # Upload fat jar to S3
 echo "Copying jar to S3..."
-aws s3 cp ./build/libs/cheep-honk.jar s3://cheep-honk/cheep-honk-${GITHUB_SHA:0:8}.jar
+aws s3 cp ./build/libs/cheep-honk-1.0-SNAPSHOT.jar s3://cheep-honk/cheep-honk-${GITHUB_SHA:0:8}.jar
 echo "Done!"
 
 # Package template.yaml -> packaged-template.yaml
