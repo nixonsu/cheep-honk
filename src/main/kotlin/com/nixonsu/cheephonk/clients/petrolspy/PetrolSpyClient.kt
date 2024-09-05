@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.nixonsu.cheephonk.domain.Bounds
 import com.nixonsu.cheephonk.domain.FuelStation
+import com.nixonsu.cheephonk.utils.DnsResolutionLogger
 import org.slf4j.LoggerFactory
 import java.net.URI
 import java.net.http.HttpClient
@@ -20,6 +21,7 @@ class PetrolSpyClient(
     override fun getStationsWithinBounds(bounds: Bounds): List<FuelStation> {
         val uri = createUri(bounds)
         val request = HttpRequest.newBuilder().GET().uri(uri).build()
+        DnsResolutionLogger().logDnsResolution()
         log.info("Send request: $request")
         val httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString())
         val response = objectMapper.readValue<PetrolSpyResponse>(httpResponse.body())
