@@ -1,4 +1,4 @@
-# Cheep Honk
+# 📣 Cheep Honk 📣
 
 Daily notifications on lowest fuel prices near you!
 
