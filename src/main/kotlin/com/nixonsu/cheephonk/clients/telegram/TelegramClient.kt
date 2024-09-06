@@ -26,6 +26,7 @@ class TelegramClient(
         println(objectMapper.writeValueAsString(messageRequest))
         val request = HttpRequest.newBuilder()
             .POST(BodyPublishers.ofString(objectMapper.writeValueAsString(messageRequest)))
+            .headers("Content-Type", "application/json")
             .uri(URI.create(TELEGRAM_SEND_MESSAGE_URL))
             .build()
 
