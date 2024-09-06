@@ -40,7 +40,7 @@ class GoogleDistanceMatrixClientTest {
 
             val travelInfo = subject.getTravelInfoBetween(randomLocation, randomLocation)
 
-            assertEquals(799, travelInfo.distanceInKms)
+            assertEquals(799, travelInfo.distanceInMs)
             assertEquals(99, travelInfo.durationInSeconds)
         }
 

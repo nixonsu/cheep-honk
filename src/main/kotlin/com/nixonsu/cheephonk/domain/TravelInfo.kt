@@ -1,6 +1,6 @@
 package com.nixonsu.cheephonk.domain
 
-data class TravelInfo( // In kms
-    val distanceInKms: Int,
+data class TravelInfo(
+    val distanceInMs: Int,
     val durationInSeconds: Int,
 )

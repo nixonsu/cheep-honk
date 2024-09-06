@@ -22,6 +22,6 @@ data class Value(
 )
 
 fun DistanceMatrixResponse.toTravelInfo() = TravelInfo(
-        distanceInKms = rows.first().elements.first().distance!!.value,
+        distanceInMs = rows.first().elements.first().distance!!.value,
         durationInSeconds = rows.first().elements.first().duration!!.value
     )

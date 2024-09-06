@@ -11,7 +11,7 @@ import com.nixonsu.cheephonk.clients.petrolspy.PetrolSpyClient
 import com.nixonsu.cheephonk.clients.telegram.TelegramClient
 import com.nixonsu.cheephonk.service.FuelPriceService
 import com.nixonsu.cheephonk.utils.MaskingLogger
-import com.nixonsu.cheephonk.utils.makeNotificationMessage
+import com.nixonsu.cheephonk.utils.makeU91NotificationMessage
 import java.net.http.HttpClient
 
 class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
@@ -31,7 +31,7 @@ class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
 
         log.info("Retrieved the following stations: $stations")
 
-        val message = makeNotificationMessage(stations)
+        val message = makeU91NotificationMessage(stations)
 
         telegramClient.notify(message)
 
