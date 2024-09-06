@@ -5,6 +5,9 @@ Parameters:
   GoogleApiKey:
     Description: API key for Google Maps Platforms
     Type: String
+  ProxyApiKey:
+    Description: API key for Proxy
+    Type: String
   TelegramAuthToken:
     Description: Telegram auth token for bot
     Type: String
@@ -60,6 +63,7 @@ Resources:
       Environment:
         Variables:
           GOOGLE_API_KEY: !Ref GoogleApiKey
+          PROXY_API_KEY: !Ref ProxyApiKey
           TELEGRAM_AUTH_TOKEN: !Ref TelegramAuthToken
           TELEGRAM_CHAT_ID: !Ref TelegramChatId
           ORIGIN_LAT: !Ref OriginLat

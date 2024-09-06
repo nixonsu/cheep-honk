@@ -8,6 +8,7 @@ aws cloudformation deploy \
 --parameter-overrides \
     GitSHA=${GITHUB_SHA:0:8} \
     GoogleApiKey=${GOOGLE_API_KEY} \
+    ProxyApiKey=${PROXY_API_KEY} \
     TelegramAuthToken=${TELEGRAM_AUTH_TOKEN} \
     TelegramChatId=${TELEGRAM_CHAT_ID} \
     OriginLat=${ORIGIN_LAT} \
