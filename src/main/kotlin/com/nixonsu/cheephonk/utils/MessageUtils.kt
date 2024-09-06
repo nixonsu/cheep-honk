@@ -15,5 +15,5 @@ fun makeNotificationMessage(stations: List<FuelStation>): String {
         messageBuilder.append("\n")
     }
 
-    return messageBuilder.toString().trim()
+    return messageBuilder.toString()
 }

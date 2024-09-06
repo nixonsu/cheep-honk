@@ -23,6 +23,7 @@ class TelegramClient(
 
     override fun notify(message: String) {
         val messageRequest = MessageRequest(chatId = TELEGRAM_CHAT_ID, text = message)
+        println(objectMapper.writeValueAsString(messageRequest))
         val request = HttpRequest.newBuilder()
             .POST(BodyPublishers.ofString(objectMapper.writeValueAsString(messageRequest)))
             .uri(URI.create(TELEGRAM_SEND_MESSAGE_URL))
