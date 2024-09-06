@@ -7,9 +7,11 @@ import com.nixonsu.cheephonk.domain.Bounds
 import com.nixonsu.cheephonk.domain.FuelStation
 import org.slf4j.LoggerFactory
 import java.net.URI
+import java.net.URLEncoder
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.nio.charset.StandardCharsets
 
 class PetrolSpyClient(
     private val httpClient: HttpClient,
@@ -35,10 +37,18 @@ class PetrolSpyClient(
         val neLng = bounds.northeast.lng
         val swLat = bounds.southwest.lat
         val swLng = bounds.southwest.lng
-        return URI.create("$PETROL_SPY_API_URL?neLat=${neLat}&neLng=${neLng}&swLat=${swLat}&swLng=${swLng}")
+        val petrolSpyUrl = "$PETROL_SPY_API_URL?neLat=${neLat}&neLng=${neLng}&swLat=${swLat}&swLng=${swLng}"
+        val proxyUrl = "https://app.scrapingbee.com/api/v1/?api_key=$PROXY_API_KEY&url=${
+            URLEncoder.encode(
+                petrolSpyUrl,
+                StandardCharsets.UTF_8.toString()
+            )
+        }&render_js=false"
+        return URI.create(proxyUrl)
     }
 
     companion object {
         private const val PETROL_SPY_API_URL = "https://petrolspy.com.au/webservice-1/station/box"
+        private val PROXY_API_KEY = System.getenv("PROXY_API_KEY")
     }
 }
