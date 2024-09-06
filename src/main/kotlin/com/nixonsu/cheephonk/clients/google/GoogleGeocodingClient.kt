@@ -4,7 +4,7 @@ import com.nixonsu.cheephonk.clients.GeocodingService
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.nixonsu.cheephonk.domain.Location
-import org.slf4j.LoggerFactory
+import com.nixonsu.cheephonk.utils.MaskingLogger
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -14,7 +14,7 @@ class GoogleGeocodingClient(
     private val httpClient: HttpClient,
     private val objectMapper: ObjectMapper
 ) : GeocodingService {
-    private val log = LoggerFactory.getLogger(this::class.java)
+    private val log = MaskingLogger.getLogger(this::class.java)
 
     override fun getLocationFor(address: String): Location? {
         val uri = URI.create("$GOOGLE_GEOCODE_API_URL?address=$address&key=$apiKey")

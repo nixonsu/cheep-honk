@@ -1,6 +1,5 @@
 package com.nixonsu.cheephonk.clients.google
 
-import com.nixonsu.cheephonk.clients.google.GoogleGeocodingClient
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule

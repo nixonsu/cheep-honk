@@ -31,8 +31,6 @@ class FuelPriceService(
             }
         }
 
-        println(cheapestStations)
-
         return cheapestStations
     }
 

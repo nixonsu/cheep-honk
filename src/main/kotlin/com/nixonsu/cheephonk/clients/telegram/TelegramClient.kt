@@ -1,10 +1,10 @@
 package com.nixonsu.cheephonk.clients.telegram
 
-import com.nixonsu.cheephonk.clients.NotificationService
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.nixonsu.cheephonk.clients.NotificationService
 import com.nixonsu.cheephonk.exceptions.AuthenticationFailedException
 import com.nixonsu.cheephonk.exceptions.NotificationFailedToSendException
-import org.slf4j.LoggerFactory
+import com.nixonsu.cheephonk.utils.MaskingLogger
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -15,7 +15,7 @@ class TelegramClient(
     private val httpClient: HttpClient,
     private val objectMapper: ObjectMapper
 ) : NotificationService {
-    private val log = LoggerFactory.getLogger(this::class.java)
+    private val log = MaskingLogger.getLogger(this::class.java)
 
     init {
         authenticate()
@@ -23,7 +23,6 @@ class TelegramClient(
 
     override fun notify(message: String) {
         val messageRequest = MessageRequest(chatId = TELEGRAM_CHAT_ID, text = message)
-        println(objectMapper.writeValueAsString(messageRequest))
         val request = HttpRequest.newBuilder()
             .POST(BodyPublishers.ofString(objectMapper.writeValueAsString(messageRequest)))
             .headers("Content-Type", "application/json")
