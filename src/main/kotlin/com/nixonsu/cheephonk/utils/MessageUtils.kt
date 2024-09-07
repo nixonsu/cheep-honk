@@ -35,4 +35,4 @@ private fun makeTravelDetails(station: FuelStation) = "   🚗 *Travel*: ${
 } kms, ${round(station.travelInfo.durationInSeconds / 60.0).toInt()} mins\n".replace(".", "\\.")
 
 private fun makeDirectionsUrl(text: String, station: FuelStation) =
-    "[$text](https://www.google.com/maps/dir/?api=1&destination=${station.name.replace(" ", "+")})\n"
+    "[$text](https://www.google.com/maps/dir/?api=1&destination=${station.name.replace(" ", "+")})"
