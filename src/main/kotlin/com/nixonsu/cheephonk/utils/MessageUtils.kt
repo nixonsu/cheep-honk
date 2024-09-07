@@ -23,7 +23,7 @@ private fun makeHeader(stations: List<FuelStation>) =
     "⛽️ *Top ${stations.size} Fuel Stations Near You* 💥\n\n"
 
 private fun makeStationDetails(index: Int, station: FuelStation) =
-    "*${index + 1}. ${station.name}* (${station.brand})\n"
+    "*${index + 1}\\. ${station.name}* (${station.brand})\n"
 
 private fun makeLocationDetails(station: FuelStation) = "   📍 _${station.suburb}_\n"
 
