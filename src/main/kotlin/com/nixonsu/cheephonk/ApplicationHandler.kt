@@ -33,6 +33,8 @@ class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
 
         val message = makeMarkdownMessage(stations)
 
+        log.info(message)
+
         telegramClient.notify(message)
 
         return "OK"
