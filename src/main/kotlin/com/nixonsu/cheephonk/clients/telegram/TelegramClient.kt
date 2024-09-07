@@ -22,7 +22,14 @@ class TelegramClient(
     }
 
     override fun notify(message: String) {
-        val messageRequest = MessageRequest(chatId = TELEGRAM_CHAT_ID, text = message)
+        val messageRequest = MessageRequest(
+            chatId = TELEGRAM_CHAT_ID,
+            text = message,
+            parseMode = "MarkdownV2",
+            LinkPreviewOptions(
+                isDisabled = true,
+            )
+        )
         val request = HttpRequest.newBuilder()
             .POST(BodyPublishers.ofString(objectMapper.writeValueAsString(messageRequest)))
             .headers("Content-Type", "application/json")
