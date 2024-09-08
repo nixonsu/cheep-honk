@@ -9,6 +9,7 @@ import com.nixonsu.cheephonk.clients.google.GoogleDistanceMatrixClient
 import com.nixonsu.cheephonk.clients.google.GoogleGeocodingClient
 import com.nixonsu.cheephonk.clients.petrolspy.PetrolSpyClient
 import com.nixonsu.cheephonk.clients.telegram.TelegramClient
+import com.nixonsu.cheephonk.domain.Location
 import com.nixonsu.cheephonk.service.FuelPriceService
 import com.nixonsu.cheephonk.utils.MaskingLogger
 import com.nixonsu.cheephonk.utils.makeMarkdownMessage
@@ -27,7 +28,11 @@ class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
     private val log = MaskingLogger.getLogger(this::class.java)
 
     override fun handleRequest(input: Map<String, Any>, context: Context): String {
-        val stations = fuelPriceService.getNCheapestStationsBySuburb(10, "Springvale")
+        val stations = fuelPriceService.getNCheapestStationsFromOriginLocation(
+            Location(
+                lat = ORIGIN_LAT, lng = ORIGIN_LNG
+            ), 5
+        )
 
         log.info("Retrieved the following stations: $stations")
 
@@ -38,5 +43,10 @@ class ApplicationHandler : RequestHandler<Map<String, Any>, String> {
         telegramClient.notify(message)
 
         return "OK"
+    }
+
+    companion object {
+        private val ORIGIN_LAT = System.getenv("ORIGIN_LAT").toDouble()
+        private val ORIGIN_LNG = System.getenv("ORIGIN_LNG").toDouble()
     }
 }

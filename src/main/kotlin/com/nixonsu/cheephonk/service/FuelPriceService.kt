@@ -12,10 +12,18 @@ class FuelPriceService(
     private val geocodingService: GeocodingService,
     private val travelInfoService: TravelInfoService
 ) {
-    fun getNCheapestStationsBySuburb(n: Int, suburb: String): List<FuelStation> {
-        val location = geocodingService.getLocationFor(suburb) ?: return emptyList()
+    fun getNCheapestStationsBySuburb(n: Int, suburb: String, boundaryDelta: Double = 0.02): List<FuelStation> {
+        val originLocation = geocodingService.getLocationFor(suburb) ?: return emptyList()
 
-        val bounds = Bounds.createBoundsFrom(location, 0.02)
+        return getNCheapestStationsFromOriginLocation(originLocation, n, boundaryDelta)
+    }
+
+    fun getNCheapestStationsFromOriginLocation(
+        originLocation: Location,
+        n: Int,
+        boundaryDelta: Double = 0.02
+    ): List<FuelStation> {
+        val bounds = Bounds.createBoundsFrom(originLocation, boundaryDelta)
 
         val fuelStations = fuelStationsService.getStationsWithinBounds(bounds)
 
@@ -23,19 +31,22 @@ class FuelPriceService(
 
         val cheapestStations = stationsSortedByPrice.take(n)
 
-        cheapestStations.forEach {
-            it.apply {
-                travelInfo = travelInfoService.getTravelInfoBetween(
-                    Location(ORIGIN_LAT, ORIGIN_LNG), it.location
-                )
-            }
-        }
+        enrichStationsWithTravelInfo(cheapestStations, originLocation)
 
         return cheapestStations
     }
 
-    companion object {
-        private val ORIGIN_LAT = System.getenv("ORIGIN_LAT").toDouble()
-        private val ORIGIN_LNG = System.getenv("ORIGIN_LNG").toDouble()
+    private fun enrichStationsWithTravelInfo(
+        cheapestStations: List<FuelStation>,
+        originLocation: Location,
+    ) {
+        cheapestStations.forEach { station ->
+            station.apply {
+                travelInfo = travelInfoService.getTravelInfoBetween(
+                    originLocation, station.location
+                )
+            }
+        }
     }
+
 }
