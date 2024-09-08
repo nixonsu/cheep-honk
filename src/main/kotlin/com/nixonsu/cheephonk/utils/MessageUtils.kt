@@ -15,6 +15,8 @@ fun makeMarkdownMessage(stations: List<FuelStation>): String {
         messageBuilder.append("\n")
     }
 
+    messageBuilder.append("\n")
+
     return messageBuilder.toString()
 }
 
