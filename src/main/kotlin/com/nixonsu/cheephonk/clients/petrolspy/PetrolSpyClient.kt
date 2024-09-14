@@ -11,7 +11,6 @@ import java.net.URLEncoder
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.nio.charset.StandardCharsets
 
 class PetrolSpyClient(
     private val httpClient: HttpClient,
@@ -38,13 +37,8 @@ class PetrolSpyClient(
         val swLat = bounds.southwest.lat
         val swLng = bounds.southwest.lng
         val petrolSpyUrl = "$PETROL_SPY_API_URL?neLat=${neLat}&neLng=${neLng}&swLat=${swLat}&swLng=${swLng}"
-        val proxyUrl = "https://app.scrapingbee.com/api/v1/?api_key=$PROXY_API_KEY&url=${
-            URLEncoder.encode(
-                petrolSpyUrl,
-                StandardCharsets.UTF_8.toString()
-            )
-        }&render_js=false"
-        return URI.create(proxyUrl)
+        val proxyUrl = "https://app.scrapingbee.com/api/v1/?api_key=$PROXY_API_KEY&url=$petrolSpyUrl&render_js=false"
+        return URI.create(URLEncoder.encode(proxyUrl, Charsets.UTF_8))
     }
 
     companion object {
