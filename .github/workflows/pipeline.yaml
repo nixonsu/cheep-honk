@@ -53,7 +53,7 @@ jobs:
         run: ./ops/scripts/publish.sh
 
       - name: Upload packaged-template.yaml
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: packaged-template
           path: ./ops/deployment/packaged-template.yaml
