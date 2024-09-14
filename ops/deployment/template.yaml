@@ -68,8 +68,8 @@ Resources:
   ScheduledRule:
     Type: "AWS::Events::Rule"
     Properties:
-      Description: "Trigger Cheep Honk Lambda every day at 8AM (AEST) or 9AM (AEDT)"
-      ScheduleExpression: "cron(0 22 * * ? *)"
+      Description: "Trigger Cheep Honk Lambda every day at 9AM (AEST) or 10AM (AEDT)"
+      ScheduleExpression: "cron(0 23 * * ? *)"
       State: "ENABLED"
       Targets:
         - Arn:
