@@ -34,7 +34,7 @@ Daily notifications on lowest fuel prices near you!
 [JUnit](https://junit.org/junit5/) and [Mockk](https://mockk.io/) were used to write unit tests. Tests follow a simple hierarchy where each test is named `[ClassToTest]Test.kt` with nested inner classes dedicated to a single method for that class.
 
 ## CI/CD Pipeline ⏩
-[CI/CD pipeline](https://github.com/nixonsu/petrol-price-notifier/actions/workflows/pipeline.yaml) is used to automate tests, package and deploy to production when pushed to `main`.
+[CI/CD pipeline](https://github.com/nixonsu/cheep-honk/actions/workflows/pipeline.yaml) is used to automate tests, package and deploy to production when pushed to `main`.
 
 ## Future considerations
 This service was built with the intention of only being used by a single user. The user also needs developer expertise in order to get the service up and running. 
