@@ -11,7 +11,6 @@ aws cloudformation deploy \
     ProxyApiKey=${PROXY_API_KEY} \
     TelegramAuthToken=${TELEGRAM_AUTH_TOKEN} \
     TelegramChatId=${TELEGRAM_CHAT_ID} \
-    OriginLat=${ORIGIN_LAT} \
-    OriginLng=${ORIGIN_LNG} \
+    OriginAddress=${ORIGIN_ADDRESS} \
 --capabilities CAPABILITY_IAM
 echo "Done!"

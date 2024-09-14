@@ -9,8 +9,7 @@ env:
   PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
   TELEGRAM_AUTH_TOKEN: ${{ secrets.TELEGRAM_AUTH_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-  ORIGIN_LAT: ${{ secrets.ORIGIN_LAT }}
-  ORIGIN_LNG: ${{ secrets.ORIGIN_LNG }}
+  ORIGIN_ADDRESS: ${{ secrets.ORIGIN_ADDRESS }}
 
 on:
   push:

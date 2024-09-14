@@ -12,13 +12,13 @@ class FuelPriceService(
     private val geocodingService: GeocodingService,
     private val travelInfoService: TravelInfoService
 ) {
-    fun getNCheapestStationsBySuburb(n: Int, suburb: String, boundaryDelta: Double = 0.02): List<FuelStation> {
-        val originLocation = geocodingService.getLocationFor(suburb) ?: return emptyList()
+    fun getNCheapestStationsNearAddress(n: Int, address: String, boundaryDelta: Double = 0.02): List<FuelStation> {
+        val addressLocation = geocodingService.getLocationFor(address) ?: return emptyList()
 
-        return getNCheapestStationsFromOriginLocation(originLocation, n, boundaryDelta)
+        return getNCheapestStationsNearLocation(addressLocation, n, boundaryDelta)
     }
 
-    fun getNCheapestStationsFromOriginLocation(
+    private fun getNCheapestStationsNearLocation(
         originLocation: Location,
         n: Int,
         boundaryDelta: Double = 0.02

@@ -14,12 +14,9 @@ Parameters:
   TelegramChatId:
     Description: Telegram chat id for sending notifications to
     Type: String
-  OriginLat:
-    Description: Origin latitude
-    Type: Number
-  OriginLng:
-    Description: Origin longitude
-    Type: Number
+  OriginAddress:
+    Description: Origin address
+    Type: String
 
 Resources:
   LambdaExecutionRole:
@@ -66,8 +63,7 @@ Resources:
           PROXY_API_KEY: !Ref ProxyApiKey
           TELEGRAM_AUTH_TOKEN: !Ref TelegramAuthToken
           TELEGRAM_CHAT_ID: !Ref TelegramChatId
-          ORIGIN_LAT: !Ref OriginLat
-          ORIGIN_LNG: !Ref OriginLng
+          ORIGIN_ADDRESS: !Ref OriginAddress
 
   ScheduledRule:
     Type: "AWS::Events::Rule"
