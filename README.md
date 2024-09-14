@@ -28,7 +28,7 @@ Daily notifications on lowest fuel prices near you!
 - [ScrapingBee Proxy](https://www.scrapingbee.com/)
 
 ## Architecture 🏛️
-![architecture](./docs/architecture.svg)
+![architecture](./docs/architecture.png)
 
 ## Testing 🧪
 [JUnit](https://junit.org/junit5/) and [Mockk](https://mockk.io/) were used to write unit tests. Tests follow a simple hierarchy where each test is named `[ClassToTest]Test.kt` with nested inner classes dedicated to a single method for that class.
