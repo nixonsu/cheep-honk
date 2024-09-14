@@ -18,7 +18,8 @@ class GoogleGeocodingClient(
     private val log = MaskingLogger.getLogger(this::class.java)
 
     override fun getLocationFor(address: String): Location? {
-        val uri = URI.create(URLEncoder.encode("$GOOGLE_GEOCODE_API_URL?address=$address&key=$apiKey", Charsets.UTF_8))
+        val encodedAddress = URLEncoder.encode(address, Charsets.UTF_8)
+        val uri = URI.create("$GOOGLE_GEOCODE_API_URL?address=$encodedAddress&key=$apiKey")
         val request = HttpRequest.newBuilder().GET().uri(uri).build()
         log.info("Send request: $request")
         val httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString())

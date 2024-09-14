@@ -37,8 +37,9 @@ class PetrolSpyClient(
         val swLat = bounds.southwest.lat
         val swLng = bounds.southwest.lng
         val petrolSpyUrl = "$PETROL_SPY_API_URL?neLat=${neLat}&neLng=${neLng}&swLat=${swLat}&swLng=${swLng}"
-        val proxyUrl = "https://app.scrapingbee.com/api/v1/?api_key=$PROXY_API_KEY&url=$petrolSpyUrl&render_js=false"
-        return URI.create(URLEncoder.encode(proxyUrl, Charsets.UTF_8))
+        val encodedPetrolSpyUrl = URLEncoder.encode(petrolSpyUrl, Charsets.UTF_8)
+        val proxyUrl = "https://app.scrapingbee.com/api/v1/?api_key=$PROXY_API_KEY&url=$encodedPetrolSpyUrl&render_js=false"
+        return URI.create(proxyUrl)
     }
 
     companion object {
