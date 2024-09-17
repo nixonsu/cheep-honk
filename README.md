@@ -1,7 +1,5 @@
 # 📣 Cheep Honk 📣
 
-Daily notifications on lowest fuel prices near you!
-
 ![honkhonk.png](docs%2Fhonkhonk.png)
 
 <div align="center">
@@ -11,6 +9,7 @@ Daily notifications on lowest fuel prices near you!
 </p>
 </div>
 
+As the cost of fuel prices have sky rocketed, I needed a way to reliably gauge the lowest prices near me to save a few bucks. Daily notifications are sent to my phone, which allows me to stay on top of fuel prices.
 
 ## Technology 🛠️
 
